@@ -51,7 +51,22 @@ def editar_livro_por_id(id):
         if livro.get('id') == id:
             livros[indice].update(livro_alterado)
             return jsonify(livros[indice])
+        
+# Criar
+@app.route('/livros',methods=['POST'])
+def incluir_novo_livro():
+    novo_livro = request.get_json()
+    livros.append(novo_livro)
+
+    return jsonify(livros) # para retornar todos os livros e verificar que foi criado
 
 # Excluir
+@app.route('/livros/<int:od>',methods=['DELETE'])
+def excluir_livros(id):
+    for indice,livro in enumarate(livros):
+        if livro.get('id') == id:
+            del livros[indice]
+
+    return jsonify(livros) # para retornar todos os livros e verificar que foi excluido
 
 app.run(port=5000,host='localhost',debug=True)
