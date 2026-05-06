@@ -63,7 +63,7 @@ def incluir_novo_livro():
 # Excluir
 @app.route('/livros/<int:od>',methods=['DELETE'])
 def excluir_livros(id):
-    for indice,livro in enumarate(livros):
+    for indice,livro in enumerate(livros):
         if livro.get('id') == id:
             del livros[indice]
 
